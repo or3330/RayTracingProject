@@ -1,0 +1,156 @@
+
+Configuring Blender in "/home/or3330/blender-git/build_linux" ...
+-- Using pre-compiled LIBDIR: /home/or3330/blender-git/blender/../lib/linux_centos7_x86_64
+-- Found OpenMP_C: -fopenmp  
+-- Found OpenMP_CXX: -fopenmp  
+-- Could NOT find Jack (missing: JACK_LIBRARY JACK_INCLUDE_DIR) 
+-- Found OpenMP_C: -fopenmp  
+-- Found OpenMP_CXX: -fopenmp  
+-- Tests: Using Python executable: /home/or3330/blender-git/lib/linux_centos7_x86_64/python/bin/python3.7m
+-- Disabling render tests because tests folder does not exist at /home/or3330/blender-git/blender/../lib/tests
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/or3330/blender-git/build_linux
+
+Building Blender ...
+make -s -C "/home/or3330/blender-git/build_linux" -j 8 install
+[  0%] Built target bf_intern_clog
+[  0%] Built target datatoc
+[  0%] Built target bf_intern_guardedalloc
+[  0%] Built target bf_intern_numaapi
+[  0%] Built target bf_intern_memutil
+[  1%] Built target bf_intern_ghost
+[  1%] Built target bf_intern_opensubdiv
+[  1%] Built target bf_intern_glew_mx
+[  1%] Built target bf_intern_mikktspace
+[  1%] Built target bf_intern_sky
+[  1%] Built target bf_intern_audaspace
+[  1%] Built target bf_intern_eigen
+[  1%] Built target bf_intern_dualcon
+[  1%] Built target makesdna
+[  1%] Built target bf_intern_iksolver
+[  1%] Built target bf_dna_blenlib
+[  1%] Built target extern_cuew
+[  1%] Built target cycles_subd
+[  2%] Built target cycles_util
+[  3%] Built target bf_intern_itasc
+[  3%] Built target extern_clew
+[  4%] Built target bf_intern_libmv
+[  4%] Built target bf_intern_rigidbody
+[  6%] Built target cycles_osl_shaders
+[  6%] Built target bf_intern_mantaflow
+[  6%] Built target bf_intern_locale
+[  6%] Built target bf_intern_libc_compat
+[  6%] Built target bf_intern_quadriflow
+[  6%] Built target extern_curve_fit_nd
+[  6%] Built target extern_rangetree
+[  6%] Built target extern_wcwidth
+[  6%] Built target extern_binreloc
+[  6%] Built target extern_minilzo
+[  6%] Built target extern_glew
+[  7%] Built target extern_lzma
+[  8%] Built target dracoenc
+[  8%] Built target extern_xdnd
+[  8%] Built target bf_intern_openvdb
+[  8%] Built target extern_gflags
+[ 11%] Built target extern_bullet
+[ 11%] Built target extern_glog
+[ 11%] Built target datatoc_icon
+[ 13%] Built target audaspace
+[ 13%] Built target bf_editor_curve
+[ 14%] Built target bf_editor_animation
+[ 14%] Built target bf_editor_armature
+[ 15%] Built target extern_mantaflow
+[ 15%] Built target bf_editor_io
+[ 16%] Built target bf_editor_gpencil
+[ 16%] Built target bf_editor_lattice
+[ 16%] Built target bf_editor_gizmo_library
+[ 17%] Built target bf_editor_interface
+[ 17%] Built target bf_editor_mask
+[ 17%] Built target bf_editor_metaball
+[ 17%] Built target bf_editor_render
+[ 18%] Built target extern_quadriflow
+[ 18%] Built target bf_editor_scene
+[ 19%] Built target bf_editor_mesh
+[ 20%] Built target bf_editor_object
+[ 20%] Built target bf_editor_physics
+[ 20%] Built target bf_editor_sound
+[ 20%] Built target bf_editor_space_api
+[ 21%] Built target bf_editor_space_action
+[ 21%] Built target bf_editor_space_console
+[ 21%] Built target bf_editor_space_buttons
+[ 21%] Built target bf_editor_space_clip
+[ 21%] Built target bf_editor_sculpt_paint
+[ 22%] Built target bf_editor_space_file
+[ 22%] Built target bf_editor_space_graph
+[ 22%] Built target bf_editor_space_image
+[ 22%] Built target bf_editor_space_info
+[ 22%] Built target bf_editor_space_nla
+[ 22%] Built target bf_editor_space_script
+[ 22%] Built target bf_editor_space_outliner
+[ 23%] Built target bf_editor_space_node
+[ 23%] Built target bf_editor_space_statusbar
+[ 27%] Built target extern_ceres
+[ 27%] Built target bf_editor_space_sequencer
+[ 27%] Built target bf_editor_space_topbar
+[ 28%] Built target bf_editor_space_text
+[ 28%] Built target bf_editor_space_userpref
+[ 28%] Built target bf_editor_undo
+[ 28%] Built target bf_editor_util
+[ 28%] Built target bf_editor_uvedit
+[ 29%] Built target bf_editor_screen
+[ 30%] Built target bf_windowmanager
+[ 30%] Built target bf_render
+[ 30%] Built target bf_blenfont
+[ 32%] Built target bf_blenlib
+[ 35%] Built target bf_editor_datafiles
+[ 37%] Built target bf_editor_transform
+[ 37%] Built target bf_blentranslation
+[ 37%] Built target bf_ikplugin
+[ 39%] Built target bf_bmesh
+[ 40%] Built target bf_simulation
+[ 41%] Built target bf_imbuf
+[ 41%] Built target bf_shader_fx
+[ 42%] Built target bf_depsgraph
+[ 43%] Built target bf_gpencil_modifiers
+[ 43%] Built target bf_io_common
+[ 51%] Built target bf_gpu
+[ 51%] Built target bf_avi
+[ 51%] Built target bf_functions
+[ 62%] Built target bf_draw
+[ 62%] Built target bf_imbuf_openexr
+[ 62%] Built target bf_imbuf_openimageio
+[ 62%] Built target bf_imbuf_dds
+[ 63%] Built target bf_collada
+[ 63%] Built target bf_imbuf_cineon
+[ 64%] Built target bf_python_ext
+[ 64%] Built target bf_python_gpu
+[ 64%] Built target bf_python_mathutils
+[ 65%] Built target bf_python
+[ 65%] Generating buildinfo.h_fake, buildinfo.h
+[ 65%] Built target bf_python_bmesh
+[ 66%] Built target bf_intern_opencolorio
+[ 73%] Built target bf_compositor
+[ 76%] Built target bf_nodes
+[ 76%] Built target bf_usd
+[ 77%] Built target bf_dna
+[ 77%] Built target extern_draco
+[ 77%] Built target cycles_graph
+[ 77%] Built target msgfmt
+[ 77%] Built target audaspace-py
+[ 77%] Built target buildinfo
+[ 78%] Built target bf_alembic
+[ 78%] Built target bf_blenloader
+Scanning dependencies of target buildinfoobj
+[ 80%] Built target bf_modifiers
+[ 81%] Built target cycles_render
+[ 81%] Built target bf_editor_space_view3d
+[ 82%] Building C object source/creator/CMakeFiles/buildinfoobj.dir/buildinfo.c.o
+[ 82%] Built target locales
+[ 82%] Built target buildinfoobj
+[ 84%] Built target makesrna
+[ 84%] Building CXX object intern/cycles/kernel/osl/CMakeFiles/cycles_kernel_osl.dir/osl_closures.cpp.o
+[ 90%] Built target bf_freestyle
+[ 92%] Built target bf_rna
+[ 97%] Built target bf_blenkernel
+[ 98%] Built target bf_intern_cycles
