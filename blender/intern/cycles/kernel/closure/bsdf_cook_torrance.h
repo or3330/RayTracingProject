@@ -40,21 +40,22 @@ CCL_NAMESPACE_BEGIN
 typedef ccl_addr_space struct CookTorranceBsdf {
   SHADER_CLOSURE_BASE;
   float roughness;
-  float metallic;
   float ior;
-  float3 fresnel_color;
+  float metallic;
+  float reflectance;
+  float3 base_color;
 } CookTorranceBsdf;
 
 
-ccl_device_forceinline float3 reflection_color(const CookTorranceBsdf *bsdf, float3 L, float3 H)
-{
-  float3 F = make_float3(1.0f, 1.0f, 1.0f);
-  //cspec0 need to understand this variable, now its a defualt value like at  intern/cycles/kernel/osl/osl_closures.cpp:304 
-  float3 cspec0 = make_float3(0.04f, 0.04f, 0.04f);
-  float F0 = fresnel_dielectric_cos(1.0f, bsdf->ior);
-  F = interpolate_fresnel_color(L, H, bsdf->ior, F0, cspec0);
-  return F;
-}
+//ccl_device_forceinline float3 reflection_color(const CookTorranceBsdf *bsdf, float3 L, float3 H)
+//{
+//  float3 F = make_float3(1.0f, 1.0f, 1.0f);
+//  //cspec0 need to understand this variable, now its a defualt value like at  intern/cycles/kernel/osl/osl_closures.cpp:304
+//  float3 cspec0 = make_float3(0.04f, 0.04f, 0.04f);
+//  float F0 = fresnel_dielectric_cos(1.0f, bsdf->ior);
+//  F = interpolate_fresnel_color(L, H, bsdf->ior, F0, cspec0);
+//  return F;
+//}
 
 static_assert(sizeof(ShaderClosure) >= sizeof(CookTorranceBsdf), "CookTorranceBsdf is too large!");
 
@@ -62,8 +63,10 @@ ccl_device int bsdf_cook_torrance_setup(CookTorranceBsdf *bsdf)
 {
   bsdf->type = CLOSURE_BSDF_COOK_TORRANCE_ID;
   bsdf->roughness = max(bsdf->roughness, 0.0f);
+  bsdf->ior = max(bsdf->ior, 0.0f);
   bsdf->metallic = max(bsdf->metallic, 0.0f);
-  bsdf->ior = max(bsdf->ior, 0.0f); // check if this work
+  bsdf->reflectance = max(bsdf->reflectance, 0.0f);
+  printf("reflectance %f\n", double(bsdf->reflectance));
   //maybe change return value
   return SD_BSDF | SD_BSDF_HAS_EVAL;
 }
@@ -89,6 +92,7 @@ ccl_device float3 bsdf_cook_torrance_eval_reflect(const ShaderClosure *sc,
   float NdotH = max(dot(bsdf->N,halfvector),0.0f); 
   float NdotV = max(dot(bsdf->N,viewVector),0.0f);
   float NdotL = max(dot(bsdf->N,lightVector),0.0f);
+  float VdotH = max(dot(viewVector, halfvector), 0.0f);
   
   // first we implemet the D function, we use ggx method
   
@@ -96,23 +100,27 @@ ccl_device float3 bsdf_cook_torrance_eval_reflect(const ShaderClosure *sc,
   float  ggx_1_temp= roughness / (1.0f - (NdotH * NdotH) + alpha2);
   float  D =  ggx_1_temp * ggx_1_temp * M_1_PI_F ; // M_1_PI_F  = 1/Pi 
 
-  // now we calculate the G function 
-
+  // now we calculate the G function
   float g1 = (2.0f * NdotV) / (NdotV + safe_sqrtf(alpha2 + (1.0f - alpha2) * NdotV * NdotV));
   float g2 = (2.0f * NdotL) / (NdotL + sqrt(alpha2 + (1.0f - alpha2) * NdotL * NdotL));
   float G = g1*g2;
 
-  //now we calculate fresnel factor; //TODO Check this.I found this at bsdf_microfacet.h
-  float3 F = reflection_color(bsdf, omega_in, halfvector);
+
+  //now we calculate fresnel factor;
+  float m = bsdf->metallic;
+  float3 base_color = bsdf->base_color;
+  float3 f90 = (1.0f - m) * bsdf->base_color;
+  float reflect_part = 0.16f * bsdf->reflectance * bsdf->reflectance * (1.0f - m);
+  float3 f0 = make_float3(reflect_part, reflect_part, reflect_part) + base_color * m;
+  float3 F = f0 + (f90 - f0) * powf(1.0f - VdotH, 5);
   
   if (NdotV > 0 && NdotL > 0) {
     // reflect the view vector
       float common = D * 0.25f / NdotV;
       float3 out = F*G*common;
 
-      //TODO CHECK THIS ! i put this only for the complexity i use thes 
-      //https://github.com/rorydriscoll/RayTracer/blob/master/Source/RayTracer/Brdf/MicrofacetBrdf.cpp
-      *pdf = (g1 * common) ; 
+      //TODO: itay explain what is this!! https://github.com/rorydriscoll/RayTracer/blob/master/Source/RayTracer/Brdf/MicrofacetBrdf.cpp
+      *pdf = g1 * common;
 
       return out;
     }

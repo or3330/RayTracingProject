@@ -66,9 +66,10 @@ ClosureParam *closure_bsdf_cook_torrance_params()
 {
   static ClosureParam params[] = {CLOSURE_FLOAT3_PARAM(CookTorranceClosure, params.N),
                                   CLOSURE_FLOAT_PARAM(CookTorranceClosure, params.roughness),
-                                  CLOSURE_FLOAT_PARAM(CookTorranceClosure, params.metallic),
                                   CLOSURE_FLOAT_PARAM(CookTorranceClosure, params.ior),
-                                  CLOSURE_FLOAT3_PARAM(CookTorranceClosure, params.fresnel_color),
+                                  CLOSURE_FLOAT_PARAM(CookTorranceClosure, params.metallic),
+                                  CLOSURE_FLOAT_PARAM(CookTorranceClosure, params.reflectance),
+                                  CLOSURE_FLOAT3_PARAM(CookTorranceClosure, params.base_color),
                                   CLOSURE_STRING_KEYPARAM(CookTorranceClosure, label, "label"),
                                   CLOSURE_FINISH_PARAM(CookTorranceClosure)};
   return params;

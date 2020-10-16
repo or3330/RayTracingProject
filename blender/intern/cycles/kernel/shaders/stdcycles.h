@@ -37,7 +37,8 @@
 
 closure color diffuse_ramp(normal N, color colors[8]) BUILTIN;
 closure color phong_ramp(normal N, float exponent, color colors[8]) BUILTIN;
-closure color cook_torrance(normal N, float roughness,float metallic, float ior, color fresnel_color ) BUILTIN;
+closure color cook_torrance(normal N, float roughness, float ior, float metallic, float reflectance,
+                            color base_color) BUILTIN;
 closure color diffuse_toon(normal N, float size, float smooth) BUILTIN;
 closure color glossy_toon(normal N, float size, float smooth) BUILTIN;
 closure color microfacet_ggx(normal N, float ag) BUILTIN;

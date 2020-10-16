@@ -351,7 +351,6 @@ void OSLShader::register_closures(OSLShadingSystem *ss_)
 {
   OSL::ShadingSystem *ss = (OSL::ShadingSystem *)ss_;
   int id = 0;
-  printf("osl_closure.cpp 354\n" );
   register_closure(ss, "diffuse", id++, bsdf_diffuse_params(), bsdf_diffuse_prepare);
   register_closure(ss, "oren_nayar", id++, bsdf_oren_nayar_params(), bsdf_oren_nayar_prepare);
   register_closure(ss, "translucent", id++, bsdf_translucent_params(), bsdf_translucent_prepare);
